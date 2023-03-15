@@ -1,9 +1,5 @@
 import { db, storage } from "@/firebase";
-import {
-  EmojiHappyIcon,
-  PhotographIcon,
-  XIcon,
-} from "@heroicons/react/outline";
+import { PhotographIcon, XIcon } from "@heroicons/react/outline";
 import {
   addDoc,
   collection,
@@ -14,6 +10,8 @@ import {
 import { ref, getDownloadURL, uploadString } from "firebase/storage";
 import { useSession, signOut } from "next-auth/react";
 import { useState, useRef } from "react";
+import BSButton from "./BSButton";
+import PnLButton from "./PnLButton";
 
 export default function Input() {
   const { data: session } = useSession();
@@ -96,9 +94,25 @@ export default function Input() {
                 />
               </div>
             )}
-            <div className="flex items-center justify-between pt-2.5">
-              <div className="flex">
-                <div className="" onClick={() => filePickerRef.current.click()}>
+            <div className="space-y-3 w-full">
+              <div className="mt-3 flex items-center">
+                <p className="px-4">Enter Amount: </p>
+                <p className="ml-auto mr-1">$</p>
+                <input
+                  type="number"
+                  step="0.01"
+                  className="w-[225px] border border-gray-200 rounded-md pl-2"
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <PnLButton />
+                <BSButton />
+              </div>
+              <div className="flex items-center">
+                <div
+                  className="pl-2"
+                  onClick={() => filePickerRef.current.click()}
+                >
                   <PhotographIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100" />
                   <input
                     type="file"
@@ -108,8 +122,9 @@ export default function Input() {
                   />
                   {/* ref can be used after importing useRef hook from react, to connect the icon to input */}
                 </div>
-                <EmojiHappyIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100" />
               </div>
+            </div>
+            <div className="flex border-none justify-end">
               <button
                 onClick={sendPost}
                 disabled={(!input.trim() && !selectedFile) || loading}
