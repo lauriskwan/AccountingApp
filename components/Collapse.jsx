@@ -7,7 +7,14 @@ import {
 } from "@material-tailwind/react";
 import { PhotographIcon } from "@heroicons/react/outline";
 
-export default function Collapse() {
+export default function Collapse({
+  toggleButtonOne,
+  toggleButtonTwo,
+  toggleButtonThree,
+  toggleButtonFour,
+  toggleButtonFive,
+  toggleButtonSix,
+}) {
   const [open, setOpen] = useState(0);
 
   const handleOpen = (value) => {
@@ -39,7 +46,10 @@ export default function Collapse() {
         }
         className="border-none"
       >
-        <AccordionHeader className="border-none relative"></AccordionHeader>
+        <AccordionHeader
+          className="border-none relative"
+          children={""}
+        ></AccordionHeader>
         <AccordionBody>
           <div className="flex items-center">
             <p className="px-4">Enter Amount: </p>
@@ -52,14 +62,26 @@ export default function Collapse() {
           </div>
           <div className="mt-3 space-y-3 flex flex-col items-center">
             <div className="space-x-2">
-              <Button color="blue">color blue</Button>
-              <Button color="red">color red</Button>
-              <Button color="amber">color amber</Button>
+              <Button onClick={toggleButtonOne} color="blue">
+                Button 1
+              </Button>
+              <Button onClick={toggleButtonTwo} color="red">
+                Button 2
+              </Button>
+              <Button onClick={toggleButtonThree} color="amber">
+                Button 3
+              </Button>
             </div>
             <div className="space-x-2">
-              <Button color="amber">color amber</Button>
-              <Button color="red">color red</Button>
-              <Button color="blue">color blue</Button>
+              <Button onClick={toggleButtonFour} color="amber">
+                Button 4
+              </Button>
+              <Button onClick={toggleButtonFive} color="red">
+                Button 5
+              </Button>
+              <Button onClick={toggleButtonSix} color="blue">
+                Button 6
+              </Button>
             </div>
           </div>
         </AccordionBody>
