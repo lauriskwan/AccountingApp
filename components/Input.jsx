@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import { ref, getDownloadURL, uploadString } from "firebase/storage";
 import { useSession, signOut } from "next-auth/react";
-import { useState, useRef } from "react";
+import { useState, useRef, use, useEffect } from "react";
 import BSButton from "./BSButton";
 import Collapse from "./Collapse";
 import PnLButton from "./PnLButton";
@@ -20,6 +20,84 @@ export default function Input() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const filePickerRef = useRef(null); // initial value is null
+
+  // ---------- Button states
+
+  const [buttonOne, setButtonOne] = useState(0);
+  const [buttonTwo, setButtonTwo] = useState(0);
+  const [buttonThree, setButtonThree] = useState(0);
+  const [buttonFour, setButtonFour] = useState(0);
+  const [buttonFive, setButtonFive] = useState(0);
+  const [buttonSix, setButtonSix] = useState(0);
+
+  // ---------- Button states
+
+  // ---------- Button functions
+
+  function toggleButtonOne() {
+    if (buttonOne === 0 || buttonOne === 1) {
+      setButtonOne(buttonOne + 1);
+    } else {
+      setButtonOne(0);
+    }
+  }
+
+  function toggleButtonTwo() {
+    if (buttonTwo === 0 || buttonTwo === 1) {
+      setButtonTwo(buttonTwo + 1);
+    } else {
+      setButtonTwo(0);
+    }
+  }
+
+  function toggleButtonThree() {
+    if (buttonThree === 0 || buttonThree === 1) {
+      setButtonThree(buttonThree + 1);
+    } else {
+      setButtonThree(0);
+    }
+  }
+
+  function toggleButtonFour() {
+    if (buttonFour === 0 || buttonFour === 1) {
+      setButtonFour(buttonFour + 1);
+    } else {
+      setButtonFour(0);
+    }
+  }
+
+  function toggleButtonFive() {
+    if (buttonFive === 0 || buttonFive === 1) {
+      setButtonFive(buttonFive + 1);
+    } else {
+      setButtonFive(0);
+    }
+  }
+
+  function toggleButtonSix() {
+    if (buttonSix === 0 || buttonSix === 1) {
+      setButtonSix(buttonSix + 1);
+    } else {
+      setButtonSix(0);
+    }
+  }
+
+  // ---------- Button functions
+
+  // ---------- Track button states
+
+  useEffect(() => {
+    console.log(
+      `Button 1 state: ${buttonOne}, 
+      Button 2 state: ${buttonTwo}, 
+      Button 3 state: ${buttonThree}, 
+      Button 4 state: ${buttonFour}, 
+      Button 5 state: ${buttonFive}, 
+      Button 6 state: ${buttonSix}`
+    );
+  }, [buttonOne, buttonTwo, buttonThree, buttonFour, buttonFive, buttonSix]);
+
+  // ---------- Track button states
 
   const sendPost = async () => {
     if (loading) return;
@@ -111,7 +189,14 @@ export default function Input() {
                   {/* ref can be used after importing useRef hook from react, to connect the icon to input */}
                 </div>
               </div>
-              <Collapse />
+              <Collapse
+                toggleButtonOne={toggleButtonOne}
+                toggleButtonTwo={toggleButtonTwo}
+                toggleButtonThree={toggleButtonThree}
+                toggleButtonFour={toggleButtonFour}
+                toggleButtonFive={toggleButtonFive}
+                toggleButtonSix={toggleButtonSix}
+              />
             </div>
             {/*  */}
             {/* <div className="space-y-3 w-full border-none">
