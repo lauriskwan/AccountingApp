@@ -11,6 +11,7 @@ import { ref, getDownloadURL, uploadString } from "firebase/storage";
 import { useSession, signOut } from "next-auth/react";
 import { useState, useRef } from "react";
 import BSButton from "./BSButton";
+import Collapse from "./Collapse";
 import PnLButton from "./PnLButton";
 
 export default function Input() {
@@ -65,7 +66,7 @@ export default function Input() {
   return (
     <>
       {session && (
-        <div className="flex border-b border-gray-200 p-3 space-x-3">
+        <div className="flex border-b border-gray-200 p-3 space-x-3 relative">
           <img
             src={session?.user?.image}
             alt=""
@@ -94,21 +95,8 @@ export default function Input() {
                 />
               </div>
             )}
-            <div className="space-y-3 w-full">
-              <div className="mt-3 flex items-center">
-                <p className="px-4">Enter Amount: </p>
-                <p className="ml-auto mr-1">$</p>
-                <input
-                  type="number"
-                  step="0.01"
-                  className="w-[225px] border border-gray-200 rounded-md pl-2"
-                />
-              </div>
-              <div className="flex items-center justify-between">
-                <PnLButton />
-                <BSButton />
-              </div>
-              <div className="flex items-center">
+            <div className="relative">
+              <div className="flex items-center absolute z-10 top-2">
                 <div
                   className="pl-2"
                   onClick={() => filePickerRef.current.click()}
@@ -123,8 +111,26 @@ export default function Input() {
                   {/* ref can be used after importing useRef hook from react, to connect the icon to input */}
                 </div>
               </div>
+              <Collapse />
             </div>
-            <div className="flex border-none justify-end">
+            {/*  */}
+            {/* <div className="space-y-3 w-full border-none">
+              <div className="mt-3 flex items-center">
+                <p className="px-4">Enter Amount: </p>
+                <p className="ml-auto mr-1">$</p>
+                <input
+                  type="number"
+                  step="0.01"
+                  className="w-[225px] border border-gray-200 rounded-md pl-2"
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <PnLButton />
+                <BSButton />
+              </div>
+            </div> */}
+            {/*  */}
+            <div className="flex border-none justify-end mt-3">
               <button
                 onClick={sendPost}
                 disabled={(!input.trim() && !selectedFile) || loading}
